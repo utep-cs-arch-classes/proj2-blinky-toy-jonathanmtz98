@@ -43,8 +43,9 @@ void state_advance()		/* alternate between toggling red & green */
   led_changed = changed;
   led_update();
 }
-static char dimming = 0;
+
 void change_dimming(){
+  static char dimming = 0;
   if(dimming == 0){
     dimming = 1;
   }
@@ -55,5 +56,30 @@ void change_dimming(){
     dimming = 0;
   }
 }
-
-
+void firststate(){
+  static char current = 0;
+  switch (current){
+  case 0: toggle_green = 1; current = 1; break;
+  case 1: toggle_green = 1; current = 2; break;
+  case 2: toggle_green = 0; current = 0; break;
+  }
+  led_changed = 1;
+  led_update();
+}
+void thirdstate(){
+  static char current = 0;
+  switch (current){
+  case 0: toggle_red = 1; current = 1; break;
+  case 1: toggle_red = 1; current = 2; break;
+  case 2: toggle_red = 0; current = 0; break;
+  }
+  led_changed = 1;
+  led_update();
+}
+void dimmingstatemachine(){
+  switch (dimming){
+  case 0: firststate(); break;
+  case 1: toggle_red(); break;
+  case 2: thirdstate(); break;
+  }
+}

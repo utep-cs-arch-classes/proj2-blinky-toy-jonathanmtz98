@@ -10,7 +10,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){/* 250 interrupts/sec */
     blink_count = 0;
   }
   if(++state_count == 325){
-    change_dimming();
+    dimmingstatemachine();
     state_count = 0;
   }
 }
