@@ -30,7 +30,6 @@ switches.o: switches.h led.h
 
 p1_interrupt_handler.o: switches.h
 
-buzzer.o: buzzer.h
-
 blinkMain.o: led.h switches.h buzzer.h
 
+buzzer.o: buzzer.h
